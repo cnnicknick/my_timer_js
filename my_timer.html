@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>timer</title>
+    <style>
+        body {
+            background-color: #f7f7f7;
+        }
+        svg{position: absolute;top:100px;left:500px;}
+        #timer {
+            stroke: #9d9d9d;
+            stroke-linecap: round;
+            fill: #fff;
+        }
+        text{
+            /* 表盘数字 */
+            font-family: sans-serif;
+            font-size: 6pt;
+            font-weight: bold;
+            text-anchor: middle;
+            stroke: none;
+            fill: #000;
+        }
+        #hourhand {    /* 时针 */
+            stroke-width: 0px;
+            stroke: black;
+            fill:red;
+        }
+        #minutehand {  /* 分针 */
+            stroke-width: 0px;
+            stroke: black;
+            fill:yellow;
+        }
+        #secondhand {  /* 秒针 */
+            stroke-width: 1px;
+            stroke: black;
+        }
+        #hh{stroke-width: 0px;
+            stroke: black;
+            fill:green;
+        }
+        #tw{font-size:4pt;font-weight: bold;fill:orange;}
+    </style>
+</head>
+<body onload="updateTime()">
+     <svg id="timer" viewBox="-10 -10 130 130" width="600px" height="600px" t>
+     <!-- biaopan-->
+         <circle id="face" cx="50" cy="50" r="50" stroke-width="4px" stroke="#000"
+                 fill="#fff"></circle>
+         <circle id="face" cx="50" cy="50" r="45" fill="#fff"></circle>
+
+         <!-- kedu-->
+         <line x1='50' y1='5.000' x2='50.00' y2='10.00' stroke="#666"/>
+         <line x1='72.50' y1='11.03' x2='70.00' y2='15.36'/>
+         <line x1='88.97' y1='27.50' x2='84.64' y2='30.00'/>
+         <line x1='95.00' y1='50.00' x2='90.00' y2='50.00' stroke="#666"/>
+         <line x1='88.97' y1='72.50' x2='84.64' y2='70.00'/>
+         <line x1='72.50' y1='88.97' x2='70.00' y2='84.64'/>
+         <line x1='50.00' y1='95.00' x2='50.00' y2='90.00' stroke="#666"/>
+         <line x1='27.50' y1='88.97' x2='30.00' y2='84.64'/>
+         <line x1='11.03' y1='72.50' x2='15.36' y2='70.00'/>
+         <line x1='5.000' y1='50.00' x2='10.00' y2='50.00' stroke="#666"/>
+         <line x1='11.03' y1='27.50' x2='15.36' y2='30.00'/>
+         <line x1='27.50' y1='11.03' x2='30.00' y2='15.36'/>
+         <!-- biaopanshuzi-->
+         <text x="50" y="18">12</text>
+         <text x="15" y="53">9</text>
+         <text x="50" y="85">6</text>
+         <text x="85" y="53">3</text>
+         <text id="tw" x="50" y="70">TW</text>
+         <!--zhizhen-->
+         <!--<line id="hourhand" x1="50" y1="50" x2="50" y2="32"/>-->
+         <polygon id="hourhand" points="50,55 52,50 50,32 48,50"/>
+         <!--<line id="minutehand" x1="50" y1="50" x2="50" y2="24"/>-->
+         <polygon id="minutehand" points="50,55 52,50 50,24 48,50"/>
+         <!--<line id="secondhand" x1="50" y1="50" x2="50" y2="15"/>-->
+         <polygon id="hh" points="50,55 52,50 50,15 48,50"/>
+
+         <circle id="zhen" cx="50" cy="50" r="1.2" fill="blue" stroke-width="0"></circle>
+     </svg>
+
+     <script>
+         function updateTime(){
+             var date=new Date();
+             var h=date.getHours();
+             var m=date.getMinutes();
+             var s=date.getSeconds();
+             var hangle=h*30;
+             var mangle=m*6;
+             var sangle=s*6;
+             var minhand = document.getElementById("minutehand");
+             var hourhand = document.getElementById("hourhand");
+             var secondehand = document.getElementById("hh");
+             minhand.setAttribute("transform", "rotate(" + mangle + ",50,50)");
+             hourhand.setAttribute("transform", "rotate(" + hangle + ",50,50)");
+             secondehand.setAttribute("transform", "rotate(" + sangle + ",50,50)")
+
+             setTimeout(updateTime,1000);
+         }
+     </script>
+</body>
+</html>
